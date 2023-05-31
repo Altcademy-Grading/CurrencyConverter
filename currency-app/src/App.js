@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import ExchangeTable from "./ExchangeTable";
 import CurrencyRow from "./CurrencyRow";
+import ConRates from "./ConRates";
 
 const url =
   "https://v6.exchangerate-api.com/v6/3ade1fb9d3897ad274da419c/latest/USD";
@@ -11,9 +12,11 @@ function App() {
   const [currencyOptions, setCurrencyOptions] = useState([]);
   const [fromCurrency, setFromCurrency] = useState();
   const [toCurrency, setToCurrency] = useState();
-  const [exchangeRate, setExchangeRate] = useState();
+  const [exchangeRate, setExchangeRate] = useState([]);
   const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true); //lets us know which input field has been updated.
+
+
 
   let toAmount, fromAmount;
   if (amountInFromCurrency) {
@@ -71,15 +74,20 @@ function App() {
               <table className="table table-sm bg-light mt-4">
                 <thead className="tableheader">
                   <tr>
-                    <th>Country</th>
-                    <th>1.00USD</th>
+                    <th scope="col"></th>
+                    <th scope="col" className="text-right pr-4 py-2">
+                      1.00 USD
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
+                    <th scope="row1">
                       <ExchangeTable currencyOptions={currencyOptions} />
-                    </td>
+                    </th>
+                    <th scope="row2">
+                      <ConRates exchangeRate={exchangeRate} />
+                    </th>
                   </tr>
                 </tbody>
               </table>

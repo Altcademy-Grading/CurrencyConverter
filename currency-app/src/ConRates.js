@@ -1,17 +1,14 @@
 import React from "react";
 
-export default function ExchangeTable(props) {
-  const { 
-    currencyOptions, 
-    exchangeRate,
-   } = props;
+export default function ConRates(props) {
+  const { setToCurrency } = props;
 
   return (
     <>
       <tr>
         <th scope="row2">
-          <td value={currencyOptions}>
-            {currencyOptions.map((option) => (
+          <td value={setToCurrency}>
+            {setToCurrency.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
