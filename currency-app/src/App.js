@@ -15,7 +15,7 @@ function App() {
   const [exchangeRate, setExchangeRate] = useState([]);
   const [amount, setAmount] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true); //lets us know which input field has been updated.
-
+  const [rates, setRates] = useState({});
 
 
   let toAmount, fromAmount;
@@ -38,6 +38,7 @@ function App() {
         setFromCurrency(data.base_code);
         setToCurrency(firstCurrency);
         setExchangeRate(data.conversion_rates[firstCurrency]);
+        setRates(data.conversion_rates);
       });
   }, []);
 
@@ -81,14 +82,14 @@ function App() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row1">
-                      <ExchangeTable currencyOptions={currencyOptions} />
-                    </th>
-                    <th scope="row2">
-                      <ConRates exchangeRate={exchangeRate} />
-                    </th>
-                  </tr>
+                  {Object.keys(rates).map(key => {
+                    return (
+                      <tr key="key">
+                        <td>{key}</td>
+                        <td>{rates[key]}</td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
